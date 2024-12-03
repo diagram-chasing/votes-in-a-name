@@ -22,7 +22,7 @@
 		4: 'In that election, 2196 voters chose <span class="dummy-candidate">Rahul Gandhi KE</span> – a candidate whose campaign began at the last moment and politcal aspirations ended right after the polls. Whether these votes were because of confusion for the other Rahul Gandhi, or real conviction, is unclear.',
 		5: "In 2014, before photos of the candidates were put on EVMs, voters of a constituency in Chhattishgarh were faced between the choice of the BJP candidate <span class='ref-candidate'>Chandu Lal Sahu</span> and <strong>11</strong> other <span class='dummy-candidate'>Chandu Lal Sahu</span>s. All spelt almost all the same. Symbols, names, but no photos.",
 		6: '<center class="mt-2">There is one real <span class="ref-candidate">Chandu Lal Sahu</span> in here..</center>',
-		7: '<center>...did you keep track of the him?</center>',
+		7: '<center>...did you keep track of him?</center>',
 		8: 'The real <span class="ref-candidate">Chandu</span> still won, but would have gotten at least 30,000 more votes without his duplicates in the running.',
 		9: "This doesn't just happen to a single party. Between 1960 to 2024, there are over 8000 candidates who share very similar names with their rivals – close enough to give careful voters pause, and perhaps misdirect the less aware into voting for namesakes who would disappear after election day."
 	};
