@@ -160,25 +160,34 @@
 	function draw() {
 		if (!ctx) return;
 
-		// Clear canvas
 		ctx.clearRect(0, 0, width, height);
-
-		// Set up transform for margins
 		ctx.save();
 		ctx.translate(margin.left, margin.top);
 
-		// Draw state lines
-		stateLines.forEach(({ scores, y }) => {
+		stateLines.forEach(({ state, scores, y }) => {
 			scores.forEach(({ algorithm, points }) => {
+				const isAlgorithmVisible = visibleAlgorithms[algorithm];
+				if (!isAlgorithmVisible) return; // Skip invisible algorithms
+
 				points.forEach(({ x, color, score }) => {
 					ctx.beginPath();
 					ctx.moveTo(x, y - 10);
 					ctx.lineTo(x, y + 10);
-					ctx.strokeStyle = color;
-					// Increase line width for mobile
-					ctx.lineWidth = hoveredLine?.x === x && hoveredLine?.y === y ? (isMobile ? 3 : 2) : 1;
-					const baseOpacity = visibleAlgorithms[algorithm] ? 0.9 : 0.01;
-					ctx.globalAlpha = hoveredLine?.x === x && hoveredLine?.y === y ? 1 : baseOpacity;
+
+					// Simplified hover check
+					const isHovered =
+						hoveredPoint.x === x && hoveredPoint.y === y && hoveredPoint.algorithm === algorithm;
+
+					if (isHovered) {
+						ctx.lineWidth = isMobile ? 4 : 3;
+						ctx.strokeStyle = algorithmColors[algorithm].dark;
+						ctx.globalAlpha = 1;
+					} else {
+						ctx.lineWidth = 1;
+						ctx.strokeStyle = color;
+						ctx.globalAlpha = 0.9;
+					}
+
 					ctx.stroke();
 				});
 			});
@@ -191,6 +200,14 @@
 		draw();
 	}
 
+	// Add this near the top with other state variables
+	let hoveredPoint = {
+		x: null,
+		y: null,
+		state: null,
+		algorithm: null
+	};
+
 	function handleMouseMove(event: MouseEvent) {
 		const rect = canvas.getBoundingClientRect();
 		mouseX = event.clientX - rect.left;
@@ -201,33 +218,37 @@
 
 		let closest = null;
 		let minDistance = Infinity;
+		let closestPoint = { x: null, y: null, state: null, algorithm: null };
 
 		stateLines.forEach(({ state, scores, y: stateY }) => {
+			if (Math.abs(y - stateY) > 15) return; // Skip if too far vertically
+
 			scores.forEach(({ algorithm, points }) => {
 				if (!visibleAlgorithms[algorithm]) return;
 
 				points.forEach((point) => {
-					const distance = Math.sqrt(Math.pow(x - point.x, 2) + Math.pow(y - stateY, 2));
+					const distance = Math.abs(x - point.x);
 					if (distance < minDistance && distance < 10) {
 						minDistance = distance;
-						// Find all scores for these names across algorithms
-						const allScores = scores.map((score) => {
-							const matchingPoint = score.points.find(
-								(p) => p.names[0] === point.names[0] && p.names[1] === point.names[1]
-							);
-							return {
-								algorithm: score.algorithm,
-								score: matchingPoint?.score || 0
-							};
-						});
-
 						closest = {
 							state,
-							scores: allScores,
+							scores: scores.map((score) => ({
+								algorithm: score.algorithm,
+								score:
+									score.points.find(
+										(p) => p.names[0] === point.names[0] && p.names[1] === point.names[1]
+									)?.score || 0
+							})),
 							names: point.names,
 							parties: point.parties,
 							x: point.x + margin.left,
 							y: stateY + margin.top
+						};
+						closestPoint = {
+							x: point.x,
+							y: stateY,
+							state,
+							algorithm
 						};
 					}
 				});
@@ -236,11 +257,12 @@
 
 		if (closest !== hoveredLine) {
 			hoveredLine = closest;
+			hoveredPoint = closestPoint;
 			if (closest) {
 				tooltip.visible = true;
 				tooltip.data = closest;
 				tooltip.x = closest.x;
-				tooltip.y = closest.y - margin.top; // small offset above point
+				tooltip.y = closest.y - margin.top;
 			} else {
 				tooltip.visible = false;
 			}
@@ -399,6 +421,7 @@
 		min-width: 200px;
 		max-width: 280px;
 		border-color: rgba(0, 0, 0, 0.1);
+		transition: opacity 0.2s ease-in-out; /* Smooth transition for tooltip */
 	}
 
 	/* Add styles for the axes */
