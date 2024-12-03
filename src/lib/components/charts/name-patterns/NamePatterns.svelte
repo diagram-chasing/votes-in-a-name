@@ -181,9 +181,6 @@
 	// Add quadtree state
 	let quadtree;
 
-	// Add these state variables near the top with other state management
-	let isPanning = false;
-	let lastX = 0;
 	let lastY = 0;
 	let offsetX = 0;
 	let offsetY = 0;
