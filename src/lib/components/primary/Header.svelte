@@ -11,7 +11,7 @@
 	>
 	<span class="text-base font-medium text-center text-gray-950 font-asap-italic"> presents</span>
 </div>
-<header class="p-2 max-w-[44rem] bg-[#ff7d69] rounded-xl container">
+<header class="p-2 max-w-[40rem] bg-[#ff7d69] rounded-xl container">
 	<div class="bg-[#C3362C] text-center rounded-lg p-6 space-y-4 @container">
 		<span class="-mb-4 font-hindi hindi-version">✦ नाम तो सुना ही होगा ✦</span>
 		<h1 class="text-center header-text">{title}</h1>

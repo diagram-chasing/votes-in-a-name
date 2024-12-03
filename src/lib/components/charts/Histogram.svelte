@@ -1,6 +1,6 @@
 <script>
 	import * as d3 from 'd3';
-
+	import { smScreen } from 'svelte-ux';
 	import dataFile from '$assets/vote_share.json';
 	// Props
 	export let rawData = dataFile;
@@ -36,9 +36,11 @@
 		.scaleLinear()
 		.domain([0, d3.max(data, (d) => d.count)])
 		.range([innerHeight, 0]);
+
+	$: isMobile = !$smScreen;
 </script>
 
-<div class="w-full max-w-[44rem] mx-auto" bind:clientWidth={width}>
+<div class="w-full max-w-[40rem] mx-auto" bind:clientWidth={width}>
 	<svg {width} {height}>
 		<g transform="translate({marginLeft}, {marginTop})">
 			<!-- Bars -->
@@ -79,17 +81,15 @@
 				{/each}
 				<!-- Y-axis label above the tallest bar -->
 				<text
-					x={xScale(data[0].bin_end / 2) + (width < 768 ? 65 : 0)}
+					x={xScale(data[0].bin_end / 2) + (isMobile ? 65 : 0)}
 					y={yScale(d3.max(data, (d) => d.count)) + 20}
 					text-anchor="middle"
 					font-size="12px"
-					fill={width < 768 ? 'black' : 'white'}
+					fill={isMobile ? 'black' : 'white'}
 					class="font-bold font-asap"
 				>
 					<tspan>Namesake</tspan>
-					<tspan x={xScale(data[0].bin_end / 2) + (width < 768 ? 65 : 0)} dy="1.2em"
-						>candidates</tspan
-					>
+					<tspan x={xScale(data[0].bin_end / 2) + (isMobile ? 65 : 0)} dy="1.2em">candidates</tspan>
 				</text>
 			</g>
 		</g>

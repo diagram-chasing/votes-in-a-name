@@ -109,7 +109,7 @@
 <style>
 	.bibliography {
 		width: 100%;
-		max-width: 44rem;
+		max-width: 40rem;
 		margin: 0rem auto;
 	}
 

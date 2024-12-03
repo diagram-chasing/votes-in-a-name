@@ -381,7 +381,7 @@ h3,
 h4,
 h5,
 h6 {
-	max-width: 44rem;
+	max-width: 40rem;
 }
 
 /* Add specific overrides for full-width sections */
@@ -396,7 +396,7 @@ main {
 }
 
 hr {
-	max-width: 44rem;
+	max-width: 40rem;
 }
 div img {
 	width: 100%;

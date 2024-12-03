@@ -74,7 +74,7 @@ Even so, this process turned out to be incredibly sensitive to small changes in 
 
 <BarcodeChart />
 
-I think the above plot is fascinating because it shows you the range of names that each metric manages to capture, but we also see how certain states have names that are easier to capture. You'll also notice that this is being shown to three decimal places. These numbers are sensitive to small differences, so moving a threshold around can change the number of matches significantly.
+I think the above plot is fascinating because it shows you the range of names that each metric manages to capture, but we also see how certain states have names that are easier to capture. You'll also notice that this is being shown to three decimal places. Since these values are sensitive to small changes, the difference between a `0.754` and `0.775` is not insignificant.
 
 Each algorithm brings its bias - Jaro-Winkler tends toward much more optimistic matching (clustering toward higher similarity scores), BI-SIM remains conservative and grades similarity much more strictly, while Dice coefficient usually splits the difference. When two or more agree, we're more likely to catch genuine name similarities rather than algorithmic quirks. Given the mixed salad that these ballots can be - last names before first names, fondly used terms ('_bhaiya_', '_sahab_') popping up randomly, honorifics appearing wherever they may, or transliteration chaos switching between scripts, this is useful.
 
@@ -100,7 +100,7 @@ These similar candidates come in various forms. You’ve already seen how algori
 
 <NamePatterns />
 
-Certain states are much more represented here than others, but there are still some interesting patterns. First names are more likely to be changed a little, and that seems understandable. It's easier to find someone with a matching last name but a different first name in the same constituency, since surnames often indicate caste/community groups that cluster geographically. For instance, in Punjab, the last name ‘Singh’ usually remains unchanged and first names are more likely to differ, whereas in Tamil Nadu the trend goes the opposite way. Tamil Nadu also has the most number of cases where only an ‘initial’ change is required – such as the case is with A.K Moorthy’s namesake, K. Moorthy.
+Certain states are much more represented here than others, but there are still some interesting patterns. First names are more likely to vary a little, and that seems understandable. It's easier to find someone with a matching last name but a different first name in the same constituency, since surnames often indicate caste/community groups that cluster geographically. For instance, in Punjab, the last name ‘Singh’ usually remains the same and first names are more likely to differ, whereas in Tamil Nadu the trend goes the opposite way. Tamil Nadu also has the most number of cases where only an ‘initial’ change is required – such as the case is with A.K Moorthy’s namesake, K. Moorthy.
 
 ## Does it ever make a difference?
 

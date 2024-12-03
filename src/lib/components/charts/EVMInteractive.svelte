@@ -227,7 +227,7 @@
 	}
 
 	.comparison-container {
-		width: min(100%, 44rem);
+		width: min(100%, 40rem);
 		margin-inline: auto;
 	}
 

@@ -44,7 +44,7 @@
 	}
 </script>
 
-<div class="h-[350px] mx-auto w-full max-w-[44rem]">
+<div class="h-[350px] mx-auto w-full max-w-[40rem]">
 	<Chart
 		data={generatePoolData()}
 		x="category"
