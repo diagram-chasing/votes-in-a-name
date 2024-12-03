@@ -138,7 +138,7 @@
 					<th
 						class="px-2 py-1.5 font-normal text-center text-gray-800 border-b border-gray-200 whitespace-nowrap bg-zinc-50"
 					>
-						Margin
+						Election <br />Margin
 					</th>
 					<th
 						class="w-1/4 px-2 py-1.5 font-normal text-left text-gray-800 border-b border-gray-200 bg-zinc-50"

@@ -120,7 +120,7 @@
 
 		if (isHovered) {
 			ctx.strokeStyle = chroma(color).darken(2).css();
-			ctx.lineWidth = 2;
+			ctx.lineWidth = 3;
 			ctx.stroke();
 		} else {
 			ctx.strokeStyle = 'transparent';
@@ -281,14 +281,18 @@
 
 	// New optimized handleMouseMove using quadtree
 	const handleMouseMove = (event) => {
-		if (!selectedState || !quadtree) return;
+		if (!quadtree) return;
 
 		const rect = canvas.getBoundingClientRect();
 		const mouseX = (event.clientX - rect.left - offsetX) / (scale * zoom);
 		const mouseY = (event.clientY - rect.top - offsetY) / (scale * zoom);
 
-		// Clear overlay
+		// Clear both canvases
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
+
+		// Redraw all points first (this ensures non-hovered state is always visible)
+		visualizeData(namePatternData);
 
 		// Find closest point within radius
 		const radius = 5;
@@ -297,15 +301,16 @@
 		quadtree.visit((node, x1, y1, x2, y2) => {
 			if (!node.length) {
 				const d = node.data;
-				if (d.point.data.State_Name !== selectedState.fullName) return;
+				// Only consider points from the selected state
+				if (d.point.data.State_Name === selectedState.fullName) {
+					const dx = d.x - mouseX;
+					const dy = d.y - mouseY;
+					const distance = Math.sqrt(dx * dx + dy * dy);
 
-				const dx = d.x - mouseX;
-				const dy = d.y - mouseY;
-				const distance = Math.sqrt(dx * dx + dy * dy);
-
-				if (distance < radius) {
-					closest = d;
-					return true;
+					if (distance < radius) {
+						closest = d;
+						return true;
+					}
 				}
 			}
 			return (
@@ -313,7 +318,14 @@
 			);
 		});
 
-		if (closest) {
+		if (closest && closest.point.data.State_Name === selectedState.fullName) {
+			// Draw hover effect on overlay canvas
+			overlayCtx.save();
+			overlayCtx.translate(offsetX, offsetY);
+			overlayCtx.scale(scale * zoom, scale * zoom);
+			drawPoint(closest.point, closest.group, closest.index, true);
+			overlayCtx.restore();
+
 			tooltip = {
 				visible: true,
 				x: event.clientX + 20,
@@ -359,6 +371,15 @@
 		overlayCanvas.height = CONFIG.height * scale;
 		canvas.parentNode.appendChild(overlayCanvas);
 		overlayCtx = overlayCanvas.getContext('2d');
+
+		// Add mouseleave event listener here
+		canvas.addEventListener('mouseleave', () => {
+			tooltip.visible = false;
+			if (overlayCtx) {
+				overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
+			}
+			visualizeData(namePatternData); // Redraw to clear hover effect
+		});
 
 		// Draw initial visualization
 		visualizeData(namePatternData);
@@ -407,6 +428,14 @@
 		return () => {
 			if (animationFrame) cancelAnimationFrame(animationFrame);
 			if (resizeObserver) resizeObserver.disconnect();
+
+			// Remove event listener on cleanup
+			canvas.removeEventListener('mouseleave', () => {
+				tooltip.visible = false;
+				if (overlayCtx) {
+					overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
+				}
+			});
 
 			overlayCanvas.remove();
 
@@ -464,6 +493,7 @@
 		max-width: 100%;
 		height: auto;
 		touch-action: none; /* Prevents default touch behaviors */
+		transition: all 0.3s ease; /* Add transition for smooth hover effect */
 	}
 
 	.tooltip {
@@ -477,6 +507,7 @@
 		min-width: 200px;
 		max-width: 280px;
 		pointer-events: none;
+		transition: opacity 0.3s ease; /* Add transition for tooltip */
 	}
 
 	.pattern-label {
