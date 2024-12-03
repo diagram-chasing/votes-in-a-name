@@ -1,0 +1,75 @@
+{
+	"frames": {
+		"chandu.png": {
+			"frame": {
+				"x": 5,
+				"y": 5,
+				"w": 305,
+				"h": 455
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 305,
+				"h": 455
+			},
+			"sourceSize": {
+				"w": 305,
+				"h": 455
+			}
+		},
+		"fake.png": {
+			"frame": {
+				"x": 320,
+				"y": 5,
+				"w": 305,
+				"h": 455
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 305,
+				"h": 455
+			},
+			"sourceSize": {
+				"w": 305,
+				"h": 455
+			}
+		},
+		"front.png": {
+			"frame": {
+				"x": 635,
+				"y": 5,
+				"w": 305,
+				"h": 455
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 305,
+				"h": 455
+			},
+			"sourceSize": {
+				"w": 305,
+				"h": 455
+			}
+		}
+	},
+	"meta": {
+		"app": "http://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"image": "spritesheet.png",
+		"format": "RGBA8888",
+		"size": {
+			"w": 945,
+			"h": 465
+		},
+		"scale": "1"
+	}
+}

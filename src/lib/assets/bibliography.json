@@ -1,0 +1,184 @@
+[
+	{
+		"id": "TCPD2021",
+		"type": "dataset",
+		"title": "TCPD Indian Elections Data v2.0",
+		"publisher": "Trivedi Centre for Political Data, Ashoka University",
+		"URL": "https://tcpd.ashoka.edu.in/lok-dhaba/",
+		"author": [
+			{
+				"family": "Agarwal",
+				"given": "Ananay"
+			},
+			{
+				"family": "Agrawal",
+				"given": "Neelesh"
+			},
+			{
+				"family": "Bhogale",
+				"given": "Saloni"
+			},
+			{
+				"family": "Hangal",
+				"given": "Sudheendra"
+			},
+			{
+				"family": "Jensenius",
+				"given": "Francesca Refsum"
+			},
+			{
+				"family": "Kumar",
+				"given": "Mohit"
+			},
+			{
+				"family": "Narayan",
+				"given": "Chinmay"
+			},
+			{
+				"family": "Nissa",
+				"given": "Basim U"
+			},
+			{
+				"family": "Trivedi",
+				"given": "Priyamvada"
+			},
+			{
+				"family": "Verniers",
+				"given": "Gilles"
+			}
+		],
+		"issued": {
+			"date-parts": [["2021"]]
+		}
+	},
+	{
+		"id": "http://zotero.org/users/local/keeCMTSI/items/ZT7NB7WH",
+		"type": "webpage",
+		"title": "http://www.rochester.edu/college/faculty/alexander_lee/wp-content/uploads/2022/12/paper2.pdf",
+		"URL": "http://www.rochester.edu/college/faculty/alexander_lee/wp-content/uploads/2022/12/paper2.pdf",
+		"accessed": {
+			"date-parts": [["2024", 11, 24]]
+		}
+	},
+	{
+		"id": "http://zotero.org/users/local/keeCMTSI/items/LK427RJ7",
+		"type": "article-journal",
+		"abstract": "This paper addresses the mitigation of medical errors due to the confusion of sound-alike and look-alike drug names. Our approach involves application of two new methods—one based on orthographic similarity (“lookalike”) and the other based on phonetic similarity (“sound-alike”). We present a new recall-based evaluation methodology for determining the effectiveness of different similarity measures on drug names. We show that the new orthographic measure (BI-SIM) outperforms other commonly used measures of similarity on a set containing both look-alike and sound-alike pairs, and that the feature-based phonetic approach (ALINE) outperforms orthographic approaches on a test set containing solely sound-alike confusion pairs. However, an approach that combines several different measures achieves the best results on both test sets.",
+		"language": "en",
+		"source": "Zotero",
+		"title": "Identiﬁcation of Confusable Drug Names: A New Approach and Evaluation Methodology",
+		"author": [
+			{
+				"family": "Kondrak",
+				"given": "Grzegorz"
+			},
+			{
+				"family": "Dorr",
+				"given": "Bonnie"
+			}
+		]
+	},
+	{
+		"id": "http://zotero.org/users/local/keeCMTSI/items/QUVZ9W28",
+		"type": "article-journal",
+		"abstract": "Background. ‘Look-alike, sound-alike’ (LASA) medicines may be confused by prescribers, pharmacists, nurses and patients, with serious consequences for patient safety. The current research aimed to develop and trial software to proactively identify LASA medicines by computing medicine name similarity scores. Methods. Literature review identified open-source software from the United States Food and Drug Administration for screening of proposed medicine names. We adapted and refined this software to compute similarity scores (0.0000-1.0000) for all possible pairs of medicines registered in Australia. Two-fold exploratory analysis compared: 1. Computed similarity scores vs manually-calculated similarity scores that had used a different algorithm and underpinned development of Australia’s 2011 Tall Man Lettering List (‘the 2011 List’) 2. Computed risk category vs expert-consensus risk category that underpinned the 2011 List. Results. Screening of the Australian medicines register identified 7,750 medicine pairs with at least moderate (arbitrarily ≥0.6600) name similarity, including many oncology, immunomodulating and neuromuscular-blocking medicines. Computed similarity scores and resulting risk categories demonstrated a modest correlation with the manually-calculated similarity scores (r=0.324, p<0.002, 95% CI 0.119-0.529). However, agreement between the resulting risk categories was not significant (Cohen’s kappa = -0.162, standard error = 0.063.",
+		"container-title": "International Journal of Medical Informatics",
+		"DOI": "10.1016/j.ijmedinf.2020.104119",
+		"ISSN": "13865056",
+		"journalAbbreviation": "International Journal of Medical Informatics",
+		"language": "en",
+		"page": "104119",
+		"source": "DOI.org (Crossref)",
+		"title": "Development and exploratory analysis of software to detect look-alike, sound-alike medicine names",
+		"URL": "https://linkinghub.elsevier.com/retrieve/pii/S1386505619312651",
+		"volume": "137",
+		"author": [
+			{
+				"family": "Emmerton",
+				"given": "Lynne"
+			},
+			{
+				"family": "Curtain",
+				"given": "Colin"
+			},
+			{
+				"family": "Swaminathan",
+				"given": "Girish"
+			},
+			{
+				"family": "Dowling",
+				"given": "Helen"
+			}
+		],
+		"accessed": {
+			"date-parts": [["2024", 11, 26]]
+		},
+		"issued": {
+			"date-parts": [["2020", 5]]
+		}
+	},
+	{
+		"id": "http://zotero.org/users/local/keeCMTSI/items/FTQSB64H",
+		"type": "paper-conference",
+		"abstract": "Finding and matching personal names is at the core of an increasing number of applications: from text and Web mining, information retrieval and extraction, search engines, to deduplication and data linkage systems. Variations and errors in names make exact string matching problematic, and approximate matching techniques based on phonetic encoding or pattern matching have to be applied. When compared to general text, however, personal names have different characteristics that need to be considered.",
+		"container-title": "Sixth IEEE International Conference on Data Mining - Workshops (ICDMW'06)",
+		"DOI": "10.1109/ICDMW.2006.2",
+		"event-place": "Hong Kong, China",
+		"event-title": "Sixth IEEE International Conference on Data Mining - Workshops (ICDMW'06)",
+		"ISBN": "978-0-7695-2702-4",
+		"language": "en",
+		"page": "290-294",
+		"publisher": "IEEE",
+		"publisher-place": "Hong Kong, China",
+		"source": "DOI.org (Crossref)",
+		"title": "A Comparison of Personal Name Matching: Techniques and Practical Issues",
+		"title-short": "A Comparison of Personal Name Matching",
+		"URL": "http://ieeexplore.ieee.org/document/4063641/",
+		"author": [
+			{
+				"family": "Christen",
+				"given": "Peter"
+			}
+		],
+		"accessed": {
+			"date-parts": [["2024", 11, 26]]
+		},
+		"issued": {
+			"date-parts": [["2006"]]
+		}
+	},
+	{
+		"id": "http://zotero.org/users/local/keeCMTSI/items/KLHWGSNG",
+		"type": "article-journal",
+		"abstract": "In this paper, we present an approach to measure the transliteration similarity of English-Hindi word pairs. Our approach has two components. First we propose a bi-directional mapping between one or more characters in the Devanagari script and one or more characters in the Roman script (pronounced as in English). This allows a given Hindi word written in Devanagari to be transliterated into the Roman script and vice-versa. Second, we present an algorithm for computing a similarity measure that is a variant of Dice’s coefﬁcient measure and the LCSR measure and which also takes into account the constraints needed to match English-Hindi transliterated words. Finally, by evaluating various similarity metrics individually and together under a multiple measure agreement scenario, we show that it is possible to achieve a 0.92 f-measure in identifying English-Hindi word pairs that are transliterations. In order to assess the portability of our approach to other similar languages we adapt our system to the Gujarati language.",
+		"language": "en",
+		"source": "Zotero",
+		"title": "English-Hindi Transliteration using Multiple Similarity Metrics",
+		"author": [
+			{
+				"family": "Aswani",
+				"given": "Niraj"
+			},
+			{
+				"family": "Gaizauskas",
+				"given": "Robert"
+			}
+		]
+	},
+	{
+		"id": "http://zotero.org/users/local/keeCMTSI/items/F58T9DXM",
+		"type": "webpage",
+		"abstract": "The data shows that in 74 Lok Sabha and assembly constituencies, at least one of the top three contestants in terms of the vote share had to contest against at least one candidate of the same name.",
+		"container-title": "Hindustan Times",
+		"language": "en",
+		"title": "Lok Sabha polls 2019: This election season, it’s all about the names",
+		"title-short": "Lok Sabha polls 2019",
+		"URL": "https://www.hindustantimes.com/lok-sabha-elections/lok-sabha-elections-2019-what-s-in-a-name/story-bxxFbe18dNexgBUWqS4ltI.html",
+		"accessed": {
+			"date-parts": [["2024", 11, 28]]
+		},
+		"issued": {
+			"date-parts": [["2019", 3, 18]]
+		}
+	}
+]

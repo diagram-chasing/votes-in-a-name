@@ -1,0 +1,591 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* asap-latin-wght-italic */
+@font-face {
+	font-family: 'Asap Variable Italic';
+	font-style: italic;
+	font-display: swap;
+	font-weight: 100 900;
+	src: url(@fontsource-variable/asap/files/asap-latin-wght-italic.woff2) format('woff2-variations');
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304,
+		U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF,
+		U+FFFD;
+}
+/* asap-latin-wght-normal */
+@font-face {
+	font-family: 'Asap Variable';
+	font-style: normal;
+	font-display: swap;
+	font-weight: 100 900;
+	src: url(@fontsource-variable/asap/files/asap-latin-wght-normal.woff2) format('woff2-variations');
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304,
+		U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF,
+		U+FFFD;
+}
+
+/* alkatra-devanagari-wght-normal */
+@font-face {
+	font-family: 'Alkatra Variable';
+	font-style: normal;
+	font-display: swap;
+	font-weight: 400 700;
+	src: url(@fontsource-variable/alkatra/files/alkatra-devanagari-wght-normal.woff2)
+		format('woff2-variations');
+	unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839,
+		U+A8E0-A8FF, U+11B00-11B09;
+}
+:root {
+	--font-asap: 'Asap Variable', sans-serif;
+	--font-asap-italic: 'Asap Variable Italic', sans-serif;
+
+	/* Core colors */
+	--color-black: oklch(16.76% 0.04 106.83);
+	--color-gray-950: oklch(26.83% 0.02 94.63);
+	--color-gray-900: oklch(28.5% 0.06 91.57);
+	--color-gray-800: oklch(34.38% 0.027 95.72);
+	--color-gray-700: oklch(43.34% 0.018 98.6);
+	--color-gray-600: oklch(49.81% 0.017 98.53);
+
+	/* Accent color */
+	--color-accent: oklch(58.02% 0.132 40.3); /* Terra cotta / rust color */
+
+	/* Light grays */
+	--color-gray-200: oklch(92.07% 0.018 96.12);
+	--color-gray-100: oklch(94.82% 0.012 96.43);
+	--color-gray-50: oklch(96.65% 0.07 97.35);
+	--color-white: oklch(97.89% 0.01 106.42);
+
+	/* Special */
+	--color-white-alpha: oklch(100% 0 0 / 90%);
+}
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+/* Prevent font size inflation */
+html {
+	-moz-text-size-adjust: none;
+	-webkit-text-size-adjust: none;
+	text-size-adjust: none;
+}
+
+/* Remove default margin in favour of better control in authored CSS */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+	margin-block-end: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'] {
+	list-style: none;
+}
+
+/* Set core body defaults */
+body {
+	min-height: 100vh;
+	line-height: 1.5;
+	background-color: #ffffff;
+	color: var(--color-black);
+}
+
+/* Set shorter line heights on headings and interactive elements */
+h1,
+h2,
+h3,
+h4,
+button,
+input,
+label {
+	line-height: 1.1;
+}
+
+/* Balance text wrapping on headings */
+h1,
+h2,
+h3,
+h4 {
+	text-wrap: balance;
+	color: var(--color-accent);
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+	text-decoration-skip-ink: auto;
+	color: currentColor;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+	max-width: 100%;
+	display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+	font-family: inherit;
+	font-size: inherit;
+}
+
+/* Make sure textareas without a rows attribute are not tiny */
+textarea:not([rows]) {
+	min-height: 10em;
+}
+
+/* Anything that has been anchored to should have extra scroll margin */
+:target {
+	scroll-margin-block: 5ex;
+}
+
+@media print {
+	*,
+	*:before,
+	*:after {
+		background: transparent !important;
+		color: #000 !important;
+		box-shadow: none !important;
+		text-shadow: none !important;
+	}
+
+	a,
+	a:visited {
+		text-decoration: underline;
+	}
+
+	a[href]:after {
+		content: ' (' attr(href) ')';
+	}
+
+	abbr[title]:after {
+		content: ' (' attr(title) ')';
+	}
+
+	a[href^='#']:after,
+	a[href^='javascript:']:after {
+		content: '';
+	}
+
+	pre,
+	blockquote {
+		border: 1px solid #999;
+		page-break-inside: avoid;
+	}
+
+	thead {
+		display: table-header-group;
+	}
+
+	tr,
+	img {
+		page-break-inside: avoid;
+	}
+
+	img {
+		max-width: 100% !important;
+	}
+
+	p,
+	h2,
+	h3 {
+		orphans: 3;
+		widows: 3;
+	}
+
+	h2,
+	h3 {
+		page-break-after: avoid;
+	}
+}
+
+html {
+	font-size: 15px;
+	max-width: 100%;
+}
+
+@media screen and (min-width: 32rem) {
+	html {
+		font-size: 16px;
+	}
+}
+
+@media screen and (min-width: 48rem) {
+	html {
+		font-size: 18px;
+	}
+}
+
+body {
+	line-height: 1.85;
+}
+
+p,
+.splendor-p {
+	font-size: 1rem;
+	line-height: 1.6;
+	margin-bottom: 1rem;
+	font-weight: 400;
+	font-family: 'Asap Variable', sans-serif;
+	max-width: 65ch;
+}
+
+/* Base mobile-first heading sizes */
+h1,
+.splendor-h1,
+h2,
+.splendor-h2,
+h3,
+.splendor-h3,
+h4,
+.splendor-h4 {
+	margin: 1.2rem 0 0.5rem;
+	font-weight: 800;
+	line-height: 1.2;
+	font-family: 'Asap Variable', sans-serif;
+}
+
+/* Mobile sizes (default) */
+h1,
+.splendor-h1 {
+	font-size: 2rem; /* 32px */
+	margin-top: 0;
+}
+
+h2,
+.splendor-h2 {
+	font-size: 1.75rem; /* 28px */
+}
+
+h3,
+.splendor-h3 {
+	font-size: 1.5rem; /* 24px */
+}
+
+h4,
+.splendor-h4 {
+	font-size: 1.25rem; /* 20px */
+}
+
+/* Tablet sizes */
+@media screen and (min-width: 32rem) {
+	h1,
+	.splendor-h1 {
+		font-size: 2.75rem; /* 44px */
+	}
+
+	h2,
+	.splendor-h2 {
+		font-size: 2.25rem; /* 36px */
+	}
+
+	h3,
+	.splendor-h3 {
+		font-size: 1.75rem; /* 28px */
+	}
+
+	h4,
+	.splendor-h4 {
+		font-size: 1.375rem; /* 22px */
+	}
+}
+
+/* Desktop sizes */
+@media screen and (min-width: 48rem) {
+	h1,
+	.splendor-h1 {
+		font-size: 3.5rem; /* 56px */
+	}
+
+	h2,
+	.splendor-h2 {
+		font-size: 2.5rem; /* 40px */
+	}
+
+	h3,
+	.splendor-h3 {
+		font-size: 2rem; /* 32px */
+	}
+
+	h4,
+	.splendor-h4 {
+		font-size: 1.5rem; /* 24px */
+	}
+}
+
+h5,
+.splendor-h5 {
+	font-size: 1.121rem;
+}
+
+h6,
+.splendor-h6 {
+	font-size: 0.88rem;
+}
+
+small,
+.splendor-small {
+	font-size: 0.707em;
+}
+
+/* https://github.com/mrmrs/fluidity */
+
+img,
+canvas,
+iframe,
+video,
+svg,
+select,
+textarea {
+	max-width: 100%;
+}
+
+html {
+	font-size: 18px;
+	max-width: 100%;
+}
+
+/* === A bit of a gross hack so we can have bleeding divs/blockquotes. */
+
+p,
+*:not(div):not(img):not(body):not(html):not(li):not(blockquote):not(p):not(.section-container):not(
+		.app
+	):not(main):not(.ignore-w-100):not(svg):not(g):not(rect):not(text):not(table *) {
+	margin: 0 auto;
+	width: 100%;
+}
+
+body {
+	max-width: 100vw;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	max-width: 44rem;
+}
+
+/* Add specific overrides for full-width sections */
+.scrolly-section,
+.section-container,
+.app,
+main {
+	width: 100% !important;
+	max-width: none !important;
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+hr {
+	max-width: 44rem;
+}
+div img {
+	width: 100%;
+}
+
+blockquote p {
+	font-size: 1.5rem;
+	font-style: italic;
+	margin: 1rem auto 1rem;
+	max-width: 48rem;
+}
+
+li {
+	margin-left: 2rem;
+
+	list-style-type: disc;
+}
+
+/* Counteract the specificity of the gross *:not() chain. */
+
+p {
+	height: auto;
+	line-height: 1.45;
+}
+
+pre,
+code {
+	font-family: Menlo, Monaco, 'Courier New', monospace;
+}
+
+pre {
+	background-color: #fafafa;
+	font-size: 0.8rem;
+	overflow-x: scroll;
+	padding: 1.125em;
+}
+
+a,
+a:visited {
+	color: #3498db;
+	text-decoration: underline;
+	text-underline-offset: 0.25em;
+}
+
+a:hover,
+a:focus,
+a:active {
+	color: #2980b9;
+}
+
+.ref-candidate {
+	white-space: nowrap;
+	padding: 0.15rem 0.45rem;
+	padding-left: 1.8rem;
+	background-color: #3ace78;
+	color: var(--color-white-alpha);
+	outline: 1px solid var(--color-white-alpha);
+	border: 1px solid var(--color-gray-950);
+	position: relative;
+	font-size: 1rem;
+}
+
+.ref-candidate::before {
+	content: '';
+	position: absolute;
+	width: 1rem;
+	height: 1rem;
+	left: 0.45rem;
+	top: 50%;
+	transform: translateY(-50%);
+	color: #fdfdfd;
+	background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%3E%3Cpath d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/%3E%3Cpath d="m9 12 2 2 4-4"/%3E%3C/svg%3E');
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+.dummy-candidate {
+	white-space: nowrap;
+	padding: 0.15rem 0.45rem;
+	padding-left: 1.8rem;
+	background-color: #c4c8d1;
+	color: var(--color-gray-800);
+	outline: 1px solid var(--color-white-alpha);
+	font-size: 1rem;
+	border: 1px solid var(--color-gray-950);
+	position: relative;
+}
+
+.dummy-candidate::before {
+	content: '';
+	position: absolute;
+	width: 1rem;
+	height: 1rem;
+	left: 0.45rem;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 1rem;
+	height: 1rem;
+	background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="oklch(26.83% 0.02 94.63)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>');
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+/* .background-container[style*='position: fixed'] {
+	transform: none !important;
+} */
+
+@media screen and (max-width: 768px) {
+	.dummy-candidate,
+	.ref-candidate {
+		font-size: 1rem;
+	}
+}
+
+.overflow-x-auto {
+	scrollbar-width: thin; /* Firefox */
+	scrollbar-color: var(--color-gray-400) var(--color-gray-100); /* Firefox */
+	-webkit-overflow-scrolling: touch; /* iOS momentum scrolling */
+}
+
+/* Webkit (Chrome, Safari, Edge) scrollbar styles */
+.overflow-x-auto::-webkit-scrollbar {
+	height: 6px; /* for horizontal scrollbar */
+	width: 6px; /* for vertical scrollbar */
+}
+
+.overflow-x-auto::-webkit-scrollbar-track {
+	background: var(--color-gray-100);
+	border-radius: 3px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb {
+	background-color: var(--color-gray-400);
+	border-radius: 3px;
+}
+
+/* Prevent elastic overscroll effect on iOS */
+.overflow-x-auto {
+	overscroll-behavior-x: none;
+}
+
+/* Ensure smooth scrolling on supported browsers */
+@media (prefers-reduced-motion: no-preference) {
+	.overflow-x-auto {
+		scroll-behavior: smooth;
+	}
+}
+
+/* Global scrollbar styles */
+:global(::-webkit-scrollbar) {
+	width: 6px;
+	height: 6px;
+}
+
+:global(::-webkit-scrollbar-track) {
+	background-color: rgb(244 244 245); /* zinc-100 */
+}
+
+:global(::-webkit-scrollbar-thumb) {
+	background-color: rgb(212 212 216); /* zinc-300 */
+	border-radius: 0.125rem;
+}
+
+/* Firefox */
+:global(*) {
+	scrollbar-width: thin;
+	scrollbar-color: rgb(212 212 216) rgb(244 244 245); /* zinc-300 zinc-100 */
+}
+
+/* Hide scrollbars on mobile while maintaining functionality */
+@media (max-width: 768px) {
+	:global(*) {
+		scrollbar-width: none;
+		-ms-overflow-style: none;
+	}
+	:global(::-webkit-scrollbar) {
+		display: none;
+	}
+}
+
+/* Small text variant */
+small,
+.text-small {
+	font-size: 0.875em; /* Relative to parent font size */
+	line-height: 1.5;
+}
+
+/* Large text variant */
+.text-large {
+	font-size: 1.125em; /* Relative to parent font size */
+	line-height: 1.6;
+}

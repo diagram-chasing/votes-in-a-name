@@ -1,0 +1,158 @@
+---
+title: Votes in a name
+description: We went through data on 350,000 people who ran for elections in India to find which of them shared confusingly similar names.
+date: '2024-11-24'
+categories:
+  - indian elections
+  - data analysis
+author: 'Aman Bhargava'
+ogImage: '/sharecard.jpg'
+twitterHandle: '@thedivtagguy'
+---
+
+<script>
+	import Header from '$components/primary/Header.svelte'; import OpeningScroller from
+	'$components/primary/OpeningScroller.svelte'; import SectionBreak from
+	'$components/primary/SectionBreak.svelte'; import BreakoutContent from
+	'$components/primary/BreakoutContent.svelte'; import Crowd from '$components/charts/Crowd.svelte';
+	import JaroWinklerTable from '$components/charts/JaroWinklerTable.svelte'; import LakhConverter
+	from '$components/primary/LakhConverter.svelte'; import CompareAlgorithms from
+	'$components/charts/EVMInteractive.svelte'; import sectionBreakImage1 from '$assets/break-1.png';
+	import BarcodeChart from '$components/charts/barcode-plot/Barcode.svelte'; import Posters from
+	'$assets/posters.png'; import NamePatterns from
+	'$components/charts/name-patterns/NamePatterns.svelte'; import Histogram from
+	'$components/charts/Histogram.svelte'; import Bibliography from
+	'$components/primary/Bibliography.svelte'; import PartyNamesakes from
+	'$components/charts/party_namesakes/NamesakesByParty.svelte'; import CriticalRacesTable from
+	'$components/charts/critical-cases/CriticalCasesTable.svelte'; import TwoPools from
+	'$components/charts/TwoPools.svelte'; import IntersectionObserver from
+	'$components/primary/IntersectionObserver.svelte';
+</script>
+
+<OpeningScroller />
+<Header title="Votes in a name" subtitle="Namesakes in Indian Elections and How to Find Them" />
+
+India never really stops voting. At any given time, you'll probably find some state gearing up for polls, managing an electorate that spans from city professionals to farmers across 28 states and dozens of languages.
+
+To handle this diversity, the system relies heavily on symbols - INC’s hand, BJP's lotus, AAP's broom. These visual markers help voters navigate ballots that appear in multiple languages and help unify the message in a country where illiteracy is still high. While party candidates carry these established symbols, independents choose from Election Commission-approved ones, which are usually common objects like pressure cookers or ceiling fans.
+
+But here's where it gets interesting. While the system carefully prevents any confusion with party symbols, names are something of a blind spot. No two parties can share a lotus or a hand, but almost nothing stops multiple candidates from having nearly identical names. Until recently, the situation was exacerbated by the fact that the choices only appeared to voters as the names and symbols (which could also be alike) and no photographs of the people they were voting for. That changed less than a decade ago. Even so, sometimes, voters can find themselves doing double-takes at the ballot box, faced with candidates whose names are suspiciously similar to major contenders.
+
+<SectionBreak image={Posters} />
+
+That list is quite long. In their constituencies, names like Alimineti Uma Madhava Reddy faced off with Alimineti Madhava Reddy, Raghubir Singh appeared on the same ballot as Raghvir Singh, H.D. Kumaraswamy faced D. Kumaraswamy, S.V. Ramani competed with S. Veeramani, Virender Singh and Virandar Singh, a specific Mohan Lal Badoli against a more ambiguous Mohan Lal, Rajendran A. versus Rajendaran B... you get the idea.
+
+If you’re thinking, 'Well of course these are confusing to _me_, I just heard of them right now', that's sort of the point. Unless you’re getting the same coverage as major candidates that generally dominate the headlines, a part of your electorate may be just as clueless if your campaign has limited reach. And that's precisely what makes this potentially effective — it doesn't need to fool everyone, just enough voters in what might be a tight race.
+
+It's of course unlikely that most of these namesakes could effectively sway an entire electorate, and some cases might be genuine coincidence — after all, common names exist. But it is an interesting exercise to find where all such cases appear and just how similar these names can get.
+
+<Crowd layout="single" height={200} numberOfPeople={200} rows={5} mobileScale={0.8} />
+
+## Name games
+
+The Rahul and Raghul case, while high-profile, is less interesting precisely because it's so visible. Voters are unlikely to be confused by such a well-known example. Most voters first see their local candidate's written name at the EVM, where they must match what they've heard to what they see, in whichever script or language that may be. The more interesting cases lie in smaller constituencies and lesser-known candidates, where similar names have a greater impact.
+
+The numbers are big, though. Between 1960 and 2023, across general and state elections, we're examining approximately <LakhConverter initialValue="350,000"/> individual names, so I took some calls on how I filter it to a smaller, more relevant pool. After cleaning the data, the people in each constituency were divided into two groups — candidates who might face a namesake and the rest, for whom I had to figure out if they might be a namesake.
+
+<IntersectionObserver bottom={800} let:intersecting>
+	<TwoPools group={intersecting} />
+</IntersectionObserver>
+
+Name similarity can be measured in two ways: look-alike and sound-alike comparisons. To understand potential voter confusion, I needed ways to capture as much name similarity as possible (ideally, both visual and phonetic, but for this story, only visual).
+
+The usual approaches to measuring similarity proved inadequate on their own. Levenshtein distance, which counts character edits, misses structural patterns in names. Dice's letter-pair matching can stumble when similar names have different arrangements. Even the Jaro-Winkler algorithm, typically reliable for ordered names, struggles with variations of name order on ballots and spelling differences. Another, BI-SIM, offers a solution by analysing sequential letter pairs while maintaining word order, which can capture the flow of names much better, somewhat avoiding the shortcomings of simple letter-matching.
+
+Have a look at a sample of the matches and how each of these algorithms scores them.
+
+<JaroWinklerTable />
+
+They all do well in most cases, some are more eager to falsely match names than others, and some miss the obvious extent of similarity. So instead of relying on a single algorithm, I used all of them with different weights and only considered a pair of names to be a similar match if _at least_ two algorithms agreed they were.
+
+Let the algorithms vote too, if you will.
+
+Even so, this process turned out to be incredibly sensitive to small changes in what we considered a threshold for matching. Names in India vary greatly by region, so after processing the entire dataset, I plotted what kind of names they identify and how it varied.
+
+<BarcodeChart />
+
+I think the above plot is fascinating because it shows you the range of names that each metric manages to capture, but we also see how certain states have names that are easier to capture. You'll also notice that this is being shown to three decimal places. These numbers are sensitive to small differences, so moving a threshold around can change the number of matches significantly.
+
+Each algorithm brings its bias - Jaro-Winkler tends toward much more optimistic matching (clustering toward higher similarity scores), BI-SIM remains conservative and grades similarity much more strictly, while Dice coefficient usually splits the difference. When two or more agree, we're more likely to catch genuine name similarities rather than algorithmic quirks. Given the mixed salad that these ballots can be - last names before first names, fondly used terms ('_bhaiya_', '_sahab_') popping up randomly, honorifics appearing wherever they may, or transliteration chaos switching between scripts, this is useful.
+
+<SectionBreak image={sectionBreakImage1} />
+
+## We're not that different, you and I
+
+That was a long explanation, but now I could finally stop looking for names and start looking at what I can learn about them. Up to this point, a lot of it had been numbers, numbers, numbers. Yes, alright, `0.9` is more similar to something than `0.57`, but it would be nicer to translate that back into a visual.
+
+Look-alike contests are all the rage now, want to have one of our own? ~~$50 cash prize~~.
+
+We'll work our way back from the numbers and try to construct what the idea of visual similarity means for people actually look at things together for the first time and trying to make sense of which is which.
+
+<CompareAlgorithms />
+
+Sufficiently different names are easy to spot, but when they're not, it takes a bit of work.
+
+I still can't imagine having to sort between around a dozen <span class="dummy-candidate">Chandu Lal Sahu</span>s.
+
+These similar candidates come in various forms. You’ve already seen how algorithms differ based on which state the names are from, so certainly there must be some underlying structure? Well, there is!
+
+#### So what changed between us?
+
+<NamePatterns />
+
+Certain states are much more represented here than others, but there are still some interesting patterns. First names are more likely to be changed a little, and that seems understandable. It's easier to find someone with a matching last name but a different first name in the same constituency, since surnames often indicate caste/community groups that cluster geographically. For instance, in Punjab, the last name ‘Singh’ usually remains unchanged and first names are more likely to differ, whereas in Tamil Nadu the trend goes the opposite way. Tamil Nadu also has the most number of cases where only an ‘initial’ change is required – such as the case is with A.K Moorthy’s namesake, K. Moorthy.
+
+## Does it ever make a difference?
+
+So far, you've seen some ways we can identify and search for namesakes. The question that kept nagging at me was: were there cases where these namesake candidates actually flipped elections?
+
+Most of these candidates barely register in the final tallies - typically getting less than 1% of the vote. Can even small vote shares can matter in some circumstances?
+
+<Histogram />
+
+For each pair of similar names, I ran 400 simulations asking a simple question: what if those votes had gone elsewhere?
+
+I gave the simulation different scenarios where varying portions of the namesake candidate's votes (20%, 40%, 60%, etc.) went to the candidate they shared a name with. These scenarios were weighted based on our similarity scores from the name matching.
+
+While it's not perfect — voters are complex and elections are messy — it gives us a way to identify the races where namesake candidates might have had their biggest impact.
+
+I narrowed this down to show us examples where the simulation worked in favour of the non-independent candidate 50% of the time.
+
+<CriticalRacesTable />
+
+Some of these are incredibly close margins! What was interesting to me was that all of these happened in state assembly elections and not the general elections. Which, I suppose, could make sense? The campaigns in states tend to be more local, and the candidates often don't get as much attention and press coverage as they do for national races.
+
+To repeat what I said in the beginning, it seems futile to prove, only statistically, that such examples are intentional rather than coincidental. At least we know something about how to look for them now.
+
+<div class="mt-24"></div>
+
+---
+
+#### Sources and notes
+
+<div class="text-sm">
+
+    The data on election candidates comes from [Trivedi Centre for Political Data](https://tcpd.ashoka.edu.in/lok-dhaba/). We ran the analysis using R. For the Jaro-Winkler algorithm, we used the `stringdist` package. Code for the BI-SIM algorithm was adapted from [strcmp2](https://www.cs.toronto.edu/~aditya/strcmp2/). Dice algorithm was adapted from the `dice-coefficient` package available [here](https://www.npmjs.com/package/dice-coefficient). This website is built using Sveltekit and uses D3 for visualizations. Website and analysis is available on [GitHub](https://github.com/diagramchasing/votes-in-a-name).
+    <br />
+    <br />
+
+    The artwork has been made available under [CC-BY-SA](https://creativecommons.org/licenses/by-sa/4.0/). Find them [here](https://github.com/diagramchasing/votes-in-a-name/tree/main/assets).
+
+</div>
+
+<Bibliography />
+
+#### Acknowledgements
+
+<p class="text-sm">
+	I am incredibly thankful to Rhea, who came up with the idea of generating faces from numbers. It
+	is my favorite part of this piece. <br /> <br />A nod to my faulty chair, who finally called off
+	our year-long fight and let me sit at the proper height while I wrapped this project.
+</p>
+
+#### AI Disclosure
+
+<p class="text-sm">
+	No LLM was used for data cleaning, annotation or generating insights. No words were generated with an LLM. The author uses Cursor and Claude as coding assistants.
+
+</p>

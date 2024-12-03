@@ -1,0 +1,107 @@
+[
+  {
+    "party": "INC",
+    "count": 2020,
+    "voteShare": 0.0292,
+    "total_impact": 59.0541,
+    "strategy_type": "High Count, High Impact"
+  },
+  {
+    "party": "BJP",
+    "count": 1178,
+    "voteShare": 0.0186,
+    "total_impact": 21.8704,
+    "strategy_type": "High Count, Low Impact"
+  },
+  {
+    "party": "BJS",
+    "count": 246,
+    "voteShare": 0.0465,
+    "total_impact": 11.4311,
+    "strategy_type": "High Count, High Impact"
+  },
+  {
+    "party": "JNP",
+    "count": 166,
+    "voteShare": 0.0672,
+    "total_impact": 11.1533,
+    "strategy_type": "High Count, High Impact"
+  },
+  {
+    "party": "CPI",
+    "count": 331,
+    "voteShare": 0.0327,
+    "total_impact": 10.8114,
+    "strategy_type": "High Count, High Impact"
+  },
+  {
+    "party": "BSP",
+    "count": 720,
+    "voteShare": 0.0112,
+    "total_impact": 8.0484,
+    "strategy_type": "High Count, Low Impact"
+  },
+  {
+    "party": "CPM",
+    "count": 301,
+    "voteShare": 0.0249,
+    "total_impact": 7.4925,
+    "strategy_type": "High Count, High Impact"
+  },
+  {
+    "party": "ADS",
+    "count": 93,
+    "voteShare": 0.0637,
+    "total_impact": 5.9233,
+    "strategy_type": "Low Count, High Impact"
+  },
+  {
+    "party": "SSP",
+    "count": 118,
+    "voteShare": 0.0448,
+    "total_impact": 5.2832,
+    "strategy_type": "Low Count, High Impact"
+  },
+  {
+    "party": "SWA",
+    "count": 122,
+    "voteShare": 0.0429,
+    "total_impact": 5.2312,
+    "strategy_type": "High Count, High Impact"
+  },
+  {
+    "party": "ADM",
+    "count": 86,
+    "voteShare": 0.0436,
+    "total_impact": 3.7465,
+    "strategy_type": "Low Count, High Impact"
+  },
+  {
+    "party": "LKD",
+    "count": 80,
+    "voteShare": 0.0449,
+    "total_impact": 3.5881,
+    "strategy_type": "Low Count, High Impact"
+  },
+  {
+    "party": "INC(I)",
+    "count": 99,
+    "voteShare": 0.0332,
+    "total_impact": 3.2871,
+    "strategy_type": "Low Count, High Impact"
+  },
+  {
+    "party": "JD",
+    "count": 258,
+    "voteShare": 0.0108,
+    "total_impact": 2.7961,
+    "strategy_type": "High Count, Low Impact"
+  },
+  {
+    "party": "SAD",
+    "count": 118,
+    "voteShare": 0.0173,
+    "total_impact": 2.0441,
+    "strategy_type": "Low Count, Low Impact"
+  }
+]
